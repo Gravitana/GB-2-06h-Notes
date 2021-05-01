@@ -1,5 +1,6 @@
 package com.example.gb_2_06h_notes;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +14,13 @@ import android.widget.TextView;
 
 import com.example.gb_2_06h_notes.domain.Note;
 
-public class NoteDetailFragment extends Fragment {
+import java.util.Calendar;
+
+public class NoteDetailFragment extends Fragment implements View.OnClickListener {
 
     private static final String ARG_NOTE = "ARG_NOTE";
+
+    private TextView id, title, body, date;
 
     public NoteDetailFragment() {
         // Required empty public constructor
@@ -41,10 +46,10 @@ public class NoteDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView id = view.findViewById(R.id.note_detail_id);
-        TextView title = view.findViewById(R.id.note_detail_title);
-        TextView body = view.findViewById(R.id.note_detail_body);
-        TextView date = view.findViewById(R.id.note_detail_date);
+        id = view.findViewById(R.id.note_detail_id);
+        title = view.findViewById(R.id.note_detail_title);
+        body = view.findViewById(R.id.note_detail_body);
+        date = view.findViewById(R.id.note_detail_date);
 
         Note note = getArguments().getParcelable(ARG_NOTE);
 
@@ -52,5 +57,22 @@ public class NoteDetailFragment extends Fragment {
         title.setText(note.getTitle());
         body.setText(note.getBody());
         date.setText(note.getDate());
+
+        date.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        final Calendar cal = Calendar.getInstance();
+        int mYear = cal.get(Calendar.YEAR);
+        int mMonth = cal.get(Calendar.MONTH);
+        int mDay = cal.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    String editTextDateParam = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                    date.setText(editTextDateParam);
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
     }
 }
