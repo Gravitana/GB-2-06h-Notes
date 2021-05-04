@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">GB-2-06h-Notes</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_title">Заметки</string>
+    <string name="action_sort">Сортировать</string>
+    <string name="action_new">Создать новую заметку</string>
+    <string name="action_settings">Настройки</string>
 </resources>
