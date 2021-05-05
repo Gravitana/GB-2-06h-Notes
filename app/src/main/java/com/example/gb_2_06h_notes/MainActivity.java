@@ -2,6 +2,7 @@ package com.example.gb_2_06h_notes;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +34,9 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
                 }
 
                 if (item.getItemId() == R.id.action_sort) {
-                    Toast.makeText(MainActivity.this, R.string.action_sort, Toast.LENGTH_SHORT).show();
+                    PopupMenu popupMenuSort = new PopupMenu(MainActivity.this, findViewById(R.id.action_sort));
+                    popupMenuSort.inflate(R.menu.notes_sort_menu);
+                    popupMenuSort.show();
                     return true;
                 }
 

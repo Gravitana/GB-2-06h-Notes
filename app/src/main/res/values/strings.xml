@@ -4,4 +4,6 @@
     <string name="action_sort">Сортировать</string>
     <string name="action_new">Создать новую заметку</string>
     <string name="action_settings">Настройки</string>
+    <string name="action_sort_title">По заголовкам</string>
+    <string name="action_sort_date">По датам</string>
 </resources>
