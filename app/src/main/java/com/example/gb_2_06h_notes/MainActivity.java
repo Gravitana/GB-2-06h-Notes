@@ -5,12 +5,17 @@ import android.view.MenuItem;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.gb_2_06h_notes.domain.Note;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NotesListFragment.OnNoteClicked {
 
@@ -21,36 +26,26 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        isLandscape = getResources().getBoolean(R.bool.isLandscape);
+
+        initToolbar();
+        initContent();
+    }
+
+    private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
+
+        initDrawer(toolbar);
 
         toolbar.setTitle(R.string.app_title);
 
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.action_new) {
-                    Toast.makeText(MainActivity.this, R.string.action_new, Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-
-                if (item.getItemId() == R.id.action_sort) {
-                    PopupMenu popupMenuSort = new PopupMenu(MainActivity.this, findViewById(R.id.action_sort));
-                    popupMenuSort.inflate(R.menu.notes_sort_menu);
-                    popupMenuSort.show();
-                    return true;
-                }
-
-                if (item.getItemId() == R.id.action_settings) {
-                    Toast.makeText(MainActivity.this, R.string.action_settings, Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-
-                return false;
-            }
+        toolbar.setOnMenuItemClickListener(item -> {
+            int id = item.getItemId();
+            return navigateFragment(id);
         });
+    }
 
-        isLandscape = getResources().getBoolean(R.bool.isLandscape);
-
+    private void initContent() {
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (isLandscape) {
@@ -70,6 +65,80 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
                         .commit();
             }
         }
+    }
+
+    private void initDrawer(Toolbar toolbar) {
+        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+        );
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (navigateFragment(id)) {
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            }
+            return false;
+        });
+    }
+
+    private boolean navigateFragment(int id) {
+        if (id == R.id.action_new) {
+            doToast(R.string.action_new);
+            return true;
+        }
+        if (id == R.id.action_sort) {
+            PopupMenu popupMenuSort = new PopupMenu(MainActivity.this, findViewById(R.id.action_sort));
+            popupMenuSort.inflate(R.menu.notes_sort_menu);
+            popupMenuSort.show();
+
+            popupMenuSort.setOnMenuItemClickListener(item -> {
+                int idSubItem = item.getItemId();
+                return navigateFragment(idSubItem);
+            });
+
+            return true;
+        }
+        if (id == R.id.action_sort_title) {
+            doToast(R.string.action_sort_title);
+            return true;
+        }
+        if (id == R.id.action_sort_date) {
+            doToast(R.string.action_sort_date);
+            return true;
+        }
+        if (id == R.id.action_settings) {
+            doToast(R.string.action_settings);
+            return true;
+        }
+        if (id == R.id.action_theme) {
+            doToast(R.string.action_theme);
+            return true;
+        }
+        if (id == R.id.action_account) {
+            doToast(R.string.action_account);
+            return true;
+        }
+        if (id == R.id.action_favorite) {
+            doToast(R.string.action_favorite);
+            return true;
+        }
+        if (id == R.id.action_backup) {
+            doToast(R.string.action_backup);
+            return true;
+        }
+
+        return false;
+    }
+
+    private void doToast(int action) {
+        Toast.makeText(MainActivity.this, action, Toast.LENGTH_SHORT).show();
     }
 
     @Override

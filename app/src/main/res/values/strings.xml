@@ -6,4 +6,11 @@
     <string name="action_settings">Настройки</string>
     <string name="action_sort_title">По заголовкам</string>
     <string name="action_sort_date">По датам</string>
+    <string name="action_account">Аккаунт</string>
+    <string name="action_theme">Темы</string>
+    <string name="action_backup">Резервная копия</string>
+    <string name="action_favorite">Избранное</string>
+    <string name="drawer_header_title">Настройки</string>
+    <string name="navigation_drawer_open">Открыть боковушку</string>
+    <string name="navigation_drawer_close">Закрыть боковушку</string>
 </resources>
