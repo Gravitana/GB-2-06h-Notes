@@ -11,6 +11,9 @@
     <string name="action_backup">Резервная копия</string>
     <string name="action_favorite">Избранное</string>
     <string name="drawer_header_title">Настройки</string>
+    <string name="drawer_header_text">какой-то текст</string>
     <string name="navigation_drawer_open">Открыть боковушку</string>
     <string name="navigation_drawer_close">Закрыть боковушку</string>
+    <string name="drawer_header_username">Остап Ибрагимович Бендер</string>
+    <string name="photo">Фото</string>
 </resources>
