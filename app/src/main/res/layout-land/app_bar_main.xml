@@ -6,15 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <FrameLayout
+        android:id="@+id/toolbar_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <include layout="@layout/toolbar_main" />
+
+    </FrameLayout>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/list_fragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/cardview_light_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/details_fragment"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/cardview_light_background"/>
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_frame" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/details_fragment"
@@ -23,7 +33,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/list_fragment"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:background="@color/teal_200"/>
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_frame"
+        tools:background="@color/teal_200" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
