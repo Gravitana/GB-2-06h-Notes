@@ -10,10 +10,10 @@ import java.util.Date;
 
 public class Note implements Parcelable {
 
-    private int id;
-    private String title;
-    private String body;
-    private Long time;
+    private final int id;
+    private final String title;
+    private final String body;
+    private final Long time;
 
     public Note(int id, String title, String body, Long time) {
         this.id = id;
@@ -21,7 +21,6 @@ public class Note implements Parcelable {
         this.body = body;
         this.time = time;
     }
-
 
     protected Note(Parcel in) {
         id = in.readInt();

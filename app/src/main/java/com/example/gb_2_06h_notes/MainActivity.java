@@ -1,11 +1,9 @@
 package com.example.gb_2_06h_notes;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,7 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.gb_2_06h_notes.domain.Note;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NotesListFragment.OnNoteClicked {
+public class MainActivity extends AppCompatActivity implements NotesListFragment.NoteClickListener {
 
     private boolean isLandscape = false;
 

@@ -51,14 +51,19 @@ public class NoteDetailFragment extends Fragment implements View.OnClickListener
         body = view.findViewById(R.id.note_detail_body);
         date = view.findViewById(R.id.note_detail_date);
 
-        Note note = getArguments().getParcelable(ARG_NOTE);
+        Note note = null;
+        if (getArguments() != null) {
+            note = getArguments().getParcelable(ARG_NOTE);
+        }
 
-        id.setText(String.valueOf(note.getId()));
-        title.setText(note.getTitle());
-        body.setText(note.getBody());
-        date.setText(note.getDate());
+        if (note != null) {
+            id.setText(String.valueOf(note.getId()));
+            title.setText(note.getTitle());
+            body.setText(note.getBody());
+            date.setText(note.getDate());
 
-        date.setOnClickListener(this);
+            date.setOnClickListener(this);
+        }
     }
 
     @Override

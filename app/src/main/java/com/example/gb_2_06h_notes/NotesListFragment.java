@@ -20,11 +20,11 @@ import java.util.List;
 
 public class NotesListFragment extends Fragment {
 
-    public interface OnNoteClicked {
+    public interface NoteClickListener {
         void onNoteClicked(Note note);
     }
 
-    private OnNoteClicked onNoteClicked;
+    private NoteClickListener noteClickListener;
 
     public NotesListFragment() {
         // Required empty public constructor
@@ -34,14 +34,14 @@ public class NotesListFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        if (context instanceof OnNoteClicked) {
-            onNoteClicked = (OnNoteClicked) context;
+        if (context instanceof NoteClickListener) {
+            noteClickListener = (NoteClickListener) context;
         }
     }
 
     @Override
     public void onDetach() {
-        onNoteClicked = null;
+        noteClickListener = null;
         super.onDetach();
     }
 
@@ -77,8 +77,8 @@ public class NotesListFragment extends Fragment {
     }
 
     private void openNoteDetail(Note note) {
-        if (onNoteClicked != null) {
-            onNoteClicked.onNoteClicked(note);
+        if (noteClickListener != null) {
+            noteClickListener.onNoteClicked(note);
         }
     }
 }
