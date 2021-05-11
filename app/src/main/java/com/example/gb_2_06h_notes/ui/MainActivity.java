@@ -1,4 +1,4 @@
-package com.example.gb_2_06h_notes;
+package com.example.gb_2_06h_notes.ui;
 
 import android.os.Bundle;
 import android.widget.PopupMenu;
@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
 import com.google.android.material.navigation.NavigationView;
 

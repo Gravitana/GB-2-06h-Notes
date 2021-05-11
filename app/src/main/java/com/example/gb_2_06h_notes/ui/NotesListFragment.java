@@ -1,4 +1,4 @@
-package com.example.gb_2_06h_notes;
+package com.example.gb_2_06h_notes.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
 import com.example.gb_2_06h_notes.domain.NoteRepository;
 

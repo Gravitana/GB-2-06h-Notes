@@ -1,4 +1,4 @@
-package com.example.gb_2_06h_notes;
+package com.example.gb_2_06h_notes.ui;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
 
 import java.util.Calendar;
