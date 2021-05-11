@@ -12,9 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
@@ -68,13 +65,13 @@ public class NotesListFragment extends Fragment {
 
         notesList.setLayoutManager(lm);
 
-        NotesAtapter adapter = new NotesAtapter();
+        NotesAdapter adapter = new NotesAdapter();
 
         notesList.setAdapter(adapter);
 
         adapter.addData(notes);
 
-        adapter.setOnNotesListItemClickListener(new NotesAtapter.OnNotesListItemClickListener() {
+        adapter.setOnNotesListItemClickListener(new NotesAdapter.OnNotesListItemClickListener() {
             @Override
             public void onNotesListItemClick(View view, int position) {
                 openNoteDetail(notes.get(position));

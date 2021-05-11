@@ -16,7 +16,7 @@ import com.example.gb_2_06h_notes.domain.Note;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotesAtapter extends RecyclerView.Adapter<NotesAtapter.NotesViewHolder> {
+public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
 
     private ArrayList<Note> data = new ArrayList<>();
 
@@ -33,7 +33,7 @@ public class NotesAtapter extends RecyclerView.Adapter<NotesAtapter.NotesViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NotesAtapter.NotesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NotesAdapter.NotesViewHolder holder, int position) {
         Note note = data.get(position);
 
         holder.id.setText(note.getStringId());
