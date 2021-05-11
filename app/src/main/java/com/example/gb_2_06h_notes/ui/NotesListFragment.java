@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
-import com.example.gb_2_06h_notes.domain.NoteRepository;
+import com.example.gb_2_06h_notes.domain.MockNotesRepository;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class NotesListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        List<Note> notes = new NoteRepository().getNotes();
+        List<Note> notes = new MockNotesRepository().getNotes();
 
         LinearLayout notesList = view.findViewById(R.id.notes_list);
 
