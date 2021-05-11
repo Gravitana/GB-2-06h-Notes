@@ -14,12 +14,14 @@ public class Note implements Parcelable {
     private final String title;
     private final String body;
     private final Long time;
+    private final String imageUrl;
 
-    public Note(int id, String title, String body, Long time) {
+    public Note(int id, String title, String body, Long time, String imageUrl) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.time = time;
+        this.imageUrl = imageUrl;
     }
 
     protected Note(Parcel in) {
@@ -27,6 +29,7 @@ public class Note implements Parcelable {
         title = in.readString();
         body = in.readString();
         time = in.readLong();
+        imageUrl = in.readString();
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
@@ -67,6 +70,10 @@ public class Note implements Parcelable {
         return dateFormat.format(date);
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -78,5 +85,6 @@ public class Note implements Parcelable {
         dest.writeString(title);
         dest.writeString(body);
         dest.writeLong(time);
+        dest.writeString(imageUrl);
     }
 }

@@ -3,11 +3,13 @@ package com.example.gb_2_06h_notes.ui;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
 
@@ -32,8 +34,16 @@ public class NotesAtapter extends RecyclerView.Adapter<NotesAtapter.NotesViewHol
 
     @Override
     public void onBindViewHolder(@NonNull NotesAtapter.NotesViewHolder holder, int position) {
-        holder.id.setText(data.get(position).getStringId());
-        holder.title.setText(data.get(position).getTitle());
+        Note note = data.get(position);
+
+        holder.id.setText(note.getStringId());
+        holder.title.setText(note.getTitle());
+        holder.date.setText(note.getDate());
+
+        Glide.with(holder.image)
+                .load(note.getImageUrl())
+                .centerCrop()
+                .into(holder.image);
     }
 
     @Override
@@ -54,12 +64,16 @@ public class NotesAtapter extends RecyclerView.Adapter<NotesAtapter.NotesViewHol
 
         TextView id;
         TextView title;
+        TextView date;
+        ImageView image;
 
         public NotesViewHolder(@NonNull View itemView) {
             super(itemView);
 
             id = itemView.findViewById(R.id.note_item_id);
             title = itemView.findViewById(R.id.note_item_title);
+            date = itemView.findViewById(R.id.note_item_date);
+            image = itemView.findViewById(R.id.note_item_image);
 
             // Обработчик нажатий на этом NotesViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {

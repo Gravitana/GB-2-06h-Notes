@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
 
@@ -22,6 +24,7 @@ public class NoteDetailFragment extends Fragment implements View.OnClickListener
     private static final String ARG_NOTE = "ARG_NOTE";
 
     private TextView id, title, body, date;
+    private ImageView image;
 
     public NoteDetailFragment() {
         // Required empty public constructor
@@ -51,6 +54,7 @@ public class NoteDetailFragment extends Fragment implements View.OnClickListener
         title = view.findViewById(R.id.note_detail_title);
         body = view.findViewById(R.id.note_detail_body);
         date = view.findViewById(R.id.note_detail_date);
+        image = view.findViewById(R.id.note_detail_image);
 
         Note note = null;
         if (getArguments() != null) {
@@ -62,6 +66,11 @@ public class NoteDetailFragment extends Fragment implements View.OnClickListener
             title.setText(note.getTitle());
             body.setText(note.getBody());
             date.setText(note.getDate());
+
+            Glide.with(image)
+                    .load(note.getImageUrl())
+                    .centerCrop()
+                    .into(image);
 
             date.setOnClickListener(this);
         }
