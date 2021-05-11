@@ -45,6 +45,10 @@ public class Note implements Parcelable {
         return id;
     }
 
+    public String getStringId() {
+        return String.valueOf(getId());
+    }
+
     public String getTitle() {
         return title;
     }

@@ -58,7 +58,7 @@ public class NoteDetailFragment extends Fragment implements View.OnClickListener
         }
 
         if (note != null) {
-            id.setText(String.valueOf(note.getId()));
+            id.setText(note.getStringId());
             title.setText(note.getTitle());
             body.setText(note.getBody());
             date.setText(note.getDate());
