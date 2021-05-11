@@ -18,6 +18,8 @@ public class NotesAtapter extends RecyclerView.Adapter<NotesAtapter.NotesViewHol
 
     private ArrayList<Note> data = new ArrayList<>();
 
+    private OnNotesListItemClickListener onNotesListItemClickListener;
+
     public void addData(List<Note> toAdd) {
         data.addAll(toAdd);
     }
@@ -39,6 +41,15 @@ public class NotesAtapter extends RecyclerView.Adapter<NotesAtapter.NotesViewHol
         return data.size();
     }
 
+    public void setOnNotesListItemClickListener(OnNotesListItemClickListener onNotesListItemClickListener) {
+        this.onNotesListItemClickListener = onNotesListItemClickListener;
+    }
+
+    // Интерфейс для обработки нажатий
+    public interface OnNotesListItemClickListener {
+        void onNotesListItemClick(View view, int position);
+    }
+
     class NotesViewHolder extends RecyclerView.ViewHolder {
 
         TextView id;
@@ -49,6 +60,16 @@ public class NotesAtapter extends RecyclerView.Adapter<NotesAtapter.NotesViewHol
 
             id = itemView.findViewById(R.id.note_item_id);
             title = itemView.findViewById(R.id.note_item_title);
+
+            // Обработчик нажатий на этом NotesViewHolder
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onNotesListItemClickListener != null) {
+                        onNotesListItemClickListener.onNotesListItemClick(v, getAdapterPosition());
+                    }
+                }
+            });
         }
     }
 }

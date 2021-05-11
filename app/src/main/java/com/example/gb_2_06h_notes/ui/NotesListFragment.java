@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
@@ -72,6 +73,13 @@ public class NotesListFragment extends Fragment {
         notesList.setAdapter(adapter);
 
         adapter.addData(notes);
+
+        adapter.setOnNotesListItemClickListener(new NotesAtapter.OnNotesListItemClickListener() {
+            @Override
+            public void onNotesListItemClick(View view, int position) {
+                Toast.makeText(getContext(), String.format("%s - %d", "Click", position), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         adapter.notifyDataSetChanged(); // перерисовка списка
 
