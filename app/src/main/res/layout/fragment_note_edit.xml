@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_item"
+    android:backgroundTint="@color/teal_200">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/note_edit_id"
+            android:layout_width="@dimen/pic_size"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_item"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/note_edit_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_item"
+            tools:text="30.10.2021" />
+
+
+        <TextView
+            android:id="@+id/note_edit_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_item"
+            tools:text="Donec bibendum vel nunc consectetur imperdiet" />
+
+        <TextView
+            android:id="@+id/note_edit_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_item"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam accumsan tempus velit, ut cursus est egestas quis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed leo nibh, elementum vitae ipsum sit amet, fermentum semper tortor. Nunc id hendrerit tortor, vel mollis est. Ut mauris quam, euismod a vulputate nec, sagittis ac nisl." />
+
+        <TextView
+            android:id="@+id/note_edit_image_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_item"
+            tools:text="https://cdn.pixabay.com/photo/2021/04/25/12/23/flowers-6206279_960_720.jpg" />
+
+        <ImageView
+            android:id="@+id/note_edit_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/img_height" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
