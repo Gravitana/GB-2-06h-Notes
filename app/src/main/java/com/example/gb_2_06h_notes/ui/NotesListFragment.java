@@ -77,7 +77,7 @@ public class NotesListFragment extends Fragment {
         adapter.setOnNotesListItemClickListener(new NotesAtapter.OnNotesListItemClickListener() {
             @Override
             public void onNotesListItemClick(View view, int position) {
-                Toast.makeText(getContext(), String.format("%s - %d", "Click", position), Toast.LENGTH_SHORT).show();
+                openNoteDetail(notes.get(position));
             }
         });
 
@@ -103,11 +103,9 @@ public class NotesListFragment extends Fragment {
 */
     }
 
-/*
     private void openNoteDetail(Note note) {
         if (noteClickListener != null) {
             noteClickListener.onNoteClicked(note);
         }
     }
-*/
 }
