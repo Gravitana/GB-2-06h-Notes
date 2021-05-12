@@ -1,4 +1,4 @@
-package com.example.gb_2_06h_notes.ui;
+package com.example.gb_2_06h_notes.ui.list;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,15 +23,26 @@ import java.util.List;
 
 public class NotesListFragment extends Fragment {
 
-    public interface NoteClickListener {
-        void onNoteClicked(Note note);
-    }
+    private NotesListViewModel viewModel;
 
-    private NoteClickListener noteClickListener;
+    private NotesAdapter adapter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        viewModel = new ViewModelProvider(this).get(NotesListViewModel.class);
+    }
 
     public NotesListFragment() {
         // Required empty public constructor
     }
+
+    public interface NoteClickListener { // для открытия фрагмента с детальной инфой
+        void onNoteClicked(Note note);
+    }
+
+    private NoteClickListener noteClickListener;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -57,19 +70,9 @@ public class NotesListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        adapter = new NotesAdapter();
+
         List<Note> notes = new MockNotesRepository().getNotes();
-
-        RecyclerView notesList = view.findViewById(R.id.notes_list);
-
-        RecyclerView.LayoutManager lm = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-
-        notesList.setLayoutManager(lm);
-
-        NotesAdapter adapter = new NotesAdapter();
-
-        notesList.setAdapter(adapter);
-
-        adapter.addData(notes);
 
         adapter.setOnNotesListItemClickListener(new NotesAdapter.OnNotesListItemClickListener() {
             @Override
@@ -78,26 +81,26 @@ public class NotesListFragment extends Fragment {
             }
         });
 
-        adapter.notifyDataSetChanged(); // перерисовка списка
-
-/*
-        LinearLayout notesList = view.findViewById(R.id.notes_list);
-
-        for (Note note : notes) {
-            View noteView = LayoutInflater.from(requireContext())
-                    .inflate(R.layout.note_item, notesList, false);
-
-            noteView.setOnClickListener(v -> openNoteDetail(note));
-
-            TextView id = noteView.findViewById(R.id.note_item_id);
-            TextView title = noteView.findViewById(R.id.note_item_title);
-
-            id.setText(String.valueOf(note.getId()));
-            title.setText(note.getTitle());
-
-            notesList.addView(noteView);
+        if (savedInstanceState == null) {
+            viewModel.requestNotes();
         }
-*/
+
+        viewModel.getNotesLiveData().observe(getViewLifecycleOwner(), new Observer<List<Note>>() {
+            @Override
+            public void onChanged(List<Note> notes) {
+                adapter.addData(notes);
+                adapter.notifyDataSetChanged(); // перерисовка списка
+            }
+        });
+
+        RecyclerView notesList = view.findViewById(R.id.notes_list);
+
+        RecyclerView.LayoutManager lm = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+
+        notesList.setLayoutManager(lm);
+
+        notesList.setAdapter(adapter);
+
     }
 
     private void openNoteDetail(Note note) {

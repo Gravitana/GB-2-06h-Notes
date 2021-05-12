@@ -1,4 +1,4 @@
-package com.example.gb_2_06h_notes.ui;
+package com.example.gb_2_06h_notes.ui.list;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +21,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     private ArrayList<Note> data = new ArrayList<>();
 
     private OnNotesListItemClickListener onNotesListItemClickListener;
+
 
     public void addData(List<Note> toAdd) {
         data.addAll(toAdd);
