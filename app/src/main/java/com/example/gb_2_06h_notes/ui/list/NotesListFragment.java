@@ -13,13 +13,17 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
 import com.example.gb_2_06h_notes.domain.MockNotesRepository;
+import com.example.gb_2_06h_notes.ui.MainActivity;
 
 import java.util.List;
 
@@ -72,7 +76,7 @@ public class NotesListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        adapter = new NotesAdapter();
+        adapter = new NotesAdapter(this);
 
         List<Note> notes = new MockNotesRepository().getNotes();
 
@@ -107,6 +111,34 @@ public class NotesListFragment extends Fragment {
         itemDecoration.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.items_separator));
 
         notesList.addItemDecoration(itemDecoration);
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        requireActivity().getMenuInflater().inflate(R.menu.menu_list_context, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.action_open) {
+            Toast.makeText(requireContext(), "action_open", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (item.getItemId() == R.id.action_update) {
+            Toast.makeText(requireContext(), "action_update", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        if (item.getItemId() == R.id.action_delete) {
+            Toast.makeText(requireContext(), "action_delete", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        return super.onContextItemSelected(item);
     }
 
     private void openNoteDetail(Note note) {

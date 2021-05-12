@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
 
         initDrawer(toolbar);
 
-        toolbar.setTitle(R.string.app_title);
+//        toolbar.setTitle(R.string.app_title);
 
         toolbar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();

@@ -14,7 +14,7 @@
         android:background="@color/teal_200"
         app:titleTextColor="@color/teal_700"
         app:menu="@menu/main_activity_menu"
-        tools:title="NotesTitle" />
+        app:title="@string/app_title" />
 
 </com.google.android.material.appbar.AppBarLayout>
 

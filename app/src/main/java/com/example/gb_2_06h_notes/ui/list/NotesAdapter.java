@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,8 +23,14 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     private OnNotesListItemClickListener onNotesListItemClickListener;
 
+    private final Fragment fragment;
+
+    public NotesAdapter(Fragment fragment) {
+        this.fragment = fragment;
+    }
 
     public void addData(List<Note> toAdd) {
+        data.clear();
         data.addAll(toAdd);
     }
 
@@ -71,6 +78,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         public NotesViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            fragment.registerForContextMenu(itemView);
+
             id = itemView.findViewById(R.id.note_item_id);
             title = itemView.findViewById(R.id.note_item_title);
             date = itemView.findViewById(R.id.note_item_date);
@@ -83,6 +92,14 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                     if (onNotesListItemClickListener != null) {
                         onNotesListItemClickListener.onNotesListItemClick(v, getAdapterPosition());
                     }
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    itemView.showContextMenu();
+                    return true;
                 }
             });
         }
