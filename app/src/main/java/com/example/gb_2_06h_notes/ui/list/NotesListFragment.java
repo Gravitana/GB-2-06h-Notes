@@ -101,6 +101,13 @@ public class NotesListFragment extends Fragment {
 
         RecyclerView notesList = view.findViewById(R.id.notes_list);
 
+        viewModel.getNoteDeletedLiveData().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer position) {
+                adapter.delete(position);
+            }
+        });
+
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
         notesList.setLayoutManager(lm);
@@ -134,7 +141,7 @@ public class NotesListFragment extends Fragment {
         }
 
         if (item.getItemId() == R.id.action_delete) {
-            Toast.makeText(requireContext(), "action_delete", Toast.LENGTH_SHORT).show();
+            viewModel.deleteClicked(adapter.getLongClickedPosition());
             return true;
         }
 

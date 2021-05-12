@@ -25,6 +25,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     private final Fragment fragment;
 
+    private int longClickedPosition = -1;
+
     public NotesAdapter(Fragment fragment) {
         this.fragment = fragment;
     }
@@ -63,6 +65,15 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         this.onNotesListItemClickListener = onNotesListItemClickListener;
     }
 
+    public int getLongClickedPosition() {
+        return longClickedPosition;
+    }
+
+    public void delete(Integer position) {
+        data.remove(position);
+        notifyItemRemoved(position);
+    }
+
     // Интерфейс для обработки нажатий
     public interface OnNotesListItemClickListener {
         void onNotesListItemClick(View view, int position);
@@ -80,11 +91,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
             fragment.registerForContextMenu(itemView);
 
-            id = itemView.findViewById(R.id.note_item_id);
-            title = itemView.findViewById(R.id.note_item_title);
-            date = itemView.findViewById(R.id.note_item_date);
-            image = itemView.findViewById(R.id.note_item_image);
-
             // Обработчик нажатий на этом NotesViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -99,9 +105,15 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 @Override
                 public boolean onLongClick(View v) {
                     itemView.showContextMenu();
+                    longClickedPosition = getAdapterPosition();
                     return true;
                 }
             });
+
+            id = itemView.findViewById(R.id.note_item_id);
+            title = itemView.findViewById(R.id.note_item_title);
+            date = itemView.findViewById(R.id.note_item_date);
+            image = itemView.findViewById(R.id.note_item_image);
         }
     }
 }

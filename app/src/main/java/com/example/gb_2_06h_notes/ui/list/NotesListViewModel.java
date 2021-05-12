@@ -14,6 +14,8 @@ public class NotesListViewModel extends ViewModel {
 
     private final MutableLiveData<List<Note>> notesLiveData = new MutableLiveData<>();
 
+    private final MutableLiveData<Integer> noteDeletedLiveData = new MutableLiveData<>();
+
     private final NotesRepository repository = new MockNotesRepository();
 
     public LiveData<List<Note>> getNotesLiveData() { // убираем Mutable чтобы запретить изменение данных
@@ -23,5 +25,15 @@ public class NotesListViewModel extends ViewModel {
     public void requestNotes() {
         List<Note> notes = repository.getNotes();
         notesLiveData.setValue(notes);
+    }
+
+    public void deleteClicked(int longClickedPosition) {
+        repository.removeAtPosition(longClickedPosition);
+
+        noteDeletedLiveData.setValue(longClickedPosition);
+    }
+
+    public LiveData<Integer> getNoteDeletedLiveData() {
+        return noteDeletedLiveData;
     }
 }

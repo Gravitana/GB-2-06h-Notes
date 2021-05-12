@@ -21,4 +21,9 @@ public class MockNotesRepository implements NotesRepository {
 
         return notes;
     }
+
+    @Override
+    public void removeAtPosition(int longClickedPosition) {
+
+    }
 }
