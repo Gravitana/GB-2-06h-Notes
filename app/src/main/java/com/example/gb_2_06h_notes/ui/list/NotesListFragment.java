@@ -94,19 +94,12 @@ public class NotesListFragment extends Fragment {
         viewModel.getNotesLiveData().observe(getViewLifecycleOwner(), new Observer<List<Note>>() {
             @Override
             public void onChanged(List<Note> notes) {
-                adapter.addData(notes);
+                adapter.setData(notes);
                 adapter.notifyDataSetChanged(); // перерисовка списка
             }
         });
 
         RecyclerView notesList = view.findViewById(R.id.notes_list);
-
-        viewModel.getNoteDeletedLiveData().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer position) {
-                adapter.delete(position);
-            }
-        });
 
         RecyclerView.LayoutManager lm = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 

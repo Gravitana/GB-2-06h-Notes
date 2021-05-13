@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 public class Note implements Parcelable {
 
@@ -86,5 +87,22 @@ public class Note implements Parcelable {
         dest.writeString(body);
         dest.writeLong(time);
         dest.writeString(imageUrl);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Note note = (Note) o;
+        return id == note.id &&
+                Objects.equals(title, note.title) &&
+                Objects.equals(body, note.body) &&
+                Objects.equals(time, note.time) &&
+                Objects.equals(imageUrl, note.imageUrl);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, body, time, imageUrl);
     }
 }

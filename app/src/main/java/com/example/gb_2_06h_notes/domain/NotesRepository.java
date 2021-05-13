@@ -5,5 +5,7 @@ import java.util.List;
 public interface NotesRepository {
     List<Note> getNotes();
 
+    void addNote();
+
     void removeAtPosition(int longClickedPosition);
 }
