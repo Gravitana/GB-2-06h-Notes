@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
+import com.example.gb_2_06h_notes.ui.list.NotesListFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NotesListFragment.NoteClickListener {
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
 
         initDrawer(toolbar);
 
-        toolbar.setTitle(R.string.app_title);
+//        toolbar.setTitle(R.string.app_title);
 
         toolbar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
