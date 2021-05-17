@@ -10,7 +10,7 @@ public class MockNotesRepository implements NotesRepository {
     }
 
     @Override
-    public void addNote(Callback<Note> callback) {
+    public void addNote(String title, String body, String imgeUrl, Callback<Note> callback) {
 
     }
 

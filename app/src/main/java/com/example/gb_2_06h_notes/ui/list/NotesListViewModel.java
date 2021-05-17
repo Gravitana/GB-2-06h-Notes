@@ -9,7 +9,9 @@ import com.example.gb_2_06h_notes.domain.FirestoreNotesRepository;
 import com.example.gb_2_06h_notes.domain.Note;
 import com.example.gb_2_06h_notes.domain.NotesRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class NotesListViewModel extends ViewModel {
 
@@ -36,7 +38,31 @@ public class NotesListViewModel extends ViewModel {
     }
 
     public void addClicked() {
-//        repository.addNote();
+        repository.addNote(
+                UUID.randomUUID().toString(),
+                "Заметка-заглушка для имитации добавления заметки",
+                "https://cdn.pixabay.com/photo/2021/03/17/09/06/snowdrop-6101818_960_720.jpg",
+                new Callback<Note>() {
+                    @Override
+                    public void onSuccess(Note value) {
+                        if (notesLiveData.getValue() != null) {
+                            ArrayList<Note> notes = new ArrayList<>(notesLiveData.getValue());
+                            notes.add(value);
+                            notesLiveData.setValue(notes);
+                        } else {
+                            ArrayList<Note> notes = new ArrayList<>();
+                            notes.add(value);
+                            notesLiveData.setValue(notes);
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable error) {
+
+                    }
+                }
+        );
 //        notesLiveData.setValue(repository.getNotes());
     }
 
