@@ -23,8 +23,7 @@ public class NoteDetailFragment extends Fragment implements View.OnClickListener
 
     private static final String ARG_NOTE = "ARG_NOTE";
 
-    private TextView id, title, body, date;
-    private ImageView image;
+    private TextView date;
 
     public NoteDetailFragment() {
         // Required empty public constructor
@@ -50,11 +49,11 @@ public class NoteDetailFragment extends Fragment implements View.OnClickListener
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        id = view.findViewById(R.id.note_detail_id);
-        title = view.findViewById(R.id.note_detail_title);
-        body = view.findViewById(R.id.note_detail_body);
+        TextView id = view.findViewById(R.id.note_detail_id);
+        TextView title = view.findViewById(R.id.note_detail_title);
+        TextView body = view.findViewById(R.id.note_detail_body);
         date = view.findViewById(R.id.note_detail_date);
-        image = view.findViewById(R.id.note_detail_image);
+        ImageView image = view.findViewById(R.id.note_detail_image);
 
         Note note = null;
         if (getArguments() != null) {

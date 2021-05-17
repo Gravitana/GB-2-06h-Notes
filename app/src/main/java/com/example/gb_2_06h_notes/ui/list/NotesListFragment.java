@@ -80,23 +80,15 @@ public class NotesListFragment extends Fragment {
 
         List<Note> notes = new MockNotesRepository().getNotes();
 
-        adapter.setOnNotesListItemClickListener(new NotesAdapter.OnNotesListItemClickListener() {
-            @Override
-            public void onNotesListItemClick(View view, int position) {
-                openNoteDetail(notes.get(position));
-            }
-        });
+        adapter.setOnNotesListItemClickListener((view1, position) -> openNoteDetail(notes.get(position)));
 
         if (savedInstanceState == null) {
             viewModel.requestNotes();
         }
 
-        viewModel.getNotesLiveData().observe(getViewLifecycleOwner(), new Observer<List<Note>>() {
-            @Override
-            public void onChanged(List<Note> notes) {
-                adapter.setData(notes);
-                adapter.notifyDataSetChanged(); // перерисовка списка
-            }
+        viewModel.getNotesLiveData().observe(getViewLifecycleOwner(), notes1 -> {
+            adapter.setData(notes1);
+            adapter.notifyDataSetChanged(); // перерисовка списка
         });
 
         RecyclerView notesList = view.findViewById(R.id.notes_list);

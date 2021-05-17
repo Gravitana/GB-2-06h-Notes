@@ -81,12 +81,30 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         void onNotesListItemClick(View view, int position);
     }
 
+    /*
+        Таким образом, вы не будете раскрывать подробности внутреннего устройства ViewHolder'a
+        и его ответственностью становится расположение данных в собственных полях.
+        При этом вызывающий код об этом ничего не знает и если в дальнейшем вы захотите поменять способ отображения,
+        вы поменяете это только в самом ViewHolder'е, не затрагивая остальной код
+     */
+    @Override
+    public void onBindViewHolder(@NonNull NotesViewHolder holder, int position, @NonNull List<Object> payloads) {
+        Note note = data.get(position);
+
+        holder.bind(note);
+
+        Glide.with(holder.image)
+                .load(note.getImageUrl())
+                .centerCrop()
+                .into(holder.image);
+    }
+
     class NotesViewHolder extends RecyclerView.ViewHolder {
 
-        TextView id;
-        TextView title;
-        TextView date;
-        ImageView image;
+        private final TextView id;
+        private final TextView title;
+        private final TextView date;
+        private final ImageView image;
 
         public NotesViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,19 +121,22 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 }
             });
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    itemView.showContextMenu();
-                    longClickedPosition = getAdapterPosition();
-                    return true;
-                }
+            itemView.setOnLongClickListener(v -> {
+                itemView.showContextMenu();
+                longClickedPosition = getAdapterPosition();
+                return true;
             });
 
             id = itemView.findViewById(R.id.note_item_id);
             title = itemView.findViewById(R.id.note_item_title);
             date = itemView.findViewById(R.id.note_item_date);
             image = itemView.findViewById(R.id.note_item_image);
+        }
+
+        public void bind(Note note) {
+            id.setText(note.getStringId());
+            title.setText(note.getTitle());
+            date.setText(note.getDate());
         }
     }
 
