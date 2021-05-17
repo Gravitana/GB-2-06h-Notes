@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.gb_2_06h_notes.domain.MockNotesRepository;
+import com.example.gb_2_06h_notes.domain.Callback;
+import com.example.gb_2_06h_notes.domain.FirestoreNotesRepository;
 import com.example.gb_2_06h_notes.domain.Note;
 import com.example.gb_2_06h_notes.domain.NotesRepository;
 
@@ -14,23 +15,33 @@ public class NotesListViewModel extends ViewModel {
 
     private final MutableLiveData<List<Note>> notesLiveData = new MutableLiveData<>();
 
-    private final NotesRepository repository = new MockNotesRepository();
+    private final NotesRepository repository = new FirestoreNotesRepository();
 
     public LiveData<List<Note>> getNotesLiveData() { // убираем Mutable чтобы запретить изменение данных
         return notesLiveData;
     }
 
     public void requestNotes() {
-        notesLiveData.setValue(repository.getNotes());
+        repository.getNotes(new Callback<List<Note>>() {
+            @Override
+            public void onSuccess(List<Note> value) {
+                notesLiveData.setValue(value);
+            }
+
+            @Override
+            public void onError(Throwable error) {
+
+            }
+        });
     }
 
     public void addClicked() {
-        repository.addNote();
-        notesLiveData.setValue(repository.getNotes());
+//        repository.addNote();
+//        notesLiveData.setValue(repository.getNotes());
     }
 
     public void deleteClicked(int longClickedPosition) {
-        repository.removeAtPosition(longClickedPosition);
-        notesLiveData.setValue(repository.getNotes());
+//        repository.removeAtPosition(longClickedPosition);
+//        notesLiveData.setValue(repository.getNotes());
     }
 }

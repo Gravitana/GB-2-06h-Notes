@@ -2,17 +2,6 @@ package com.example.gb_2_06h_notes.ui.list;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -20,18 +9,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
-import com.example.gb_2_06h_notes.domain.MockNotesRepository;
-import com.example.gb_2_06h_notes.ui.MainActivity;
-
-import java.util.List;
 
 public class NotesListFragment extends Fragment {
 
     private NotesListViewModel viewModel;
 
     private NotesAdapter adapter;
+    private NoteClickListener noteClickListener;
+
+    public NotesListFragment() {
+        // Required empty public constructor
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,16 +38,6 @@ public class NotesListFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(NotesListViewModel.class);
     }
-
-    public NotesListFragment() {
-        // Required empty public constructor
-    }
-
-    public interface NoteClickListener { // для открытия фрагмента с детальной инфой
-        void onNoteClicked(Note note);
-    }
-
-    private NoteClickListener noteClickListener;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -77,10 +66,6 @@ public class NotesListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         adapter = new NotesAdapter(this);
-
-        List<Note> notes = new MockNotesRepository().getNotes();
-
-        adapter.setOnNotesListItemClickListener((view1, position) -> openNoteDetail(notes.get(position)));
 
         if (savedInstanceState == null) {
             viewModel.requestNotes();
@@ -137,5 +122,9 @@ public class NotesListFragment extends Fragment {
         if (noteClickListener != null) {
             noteClickListener.onNoteClicked(note);
         }
+    }
+
+    public interface NoteClickListener { // для открытия фрагмента с детальной инфой
+        void onNoteClicked(Note note);
     }
 }
