@@ -6,12 +6,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
@@ -59,6 +59,28 @@ public class NotesListFragment extends Fragment {
 
         List<Note> notes = new MockNotesRepository().getNotes();
 
+        RecyclerView notesList = view.findViewById(R.id.notes_list);
+
+        RecyclerView.LayoutManager lm = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+
+        notesList.setLayoutManager(lm);
+
+        NotesAdapter adapter = new NotesAdapter();
+
+        notesList.setAdapter(adapter);
+
+        adapter.addData(notes);
+
+        adapter.setOnNotesListItemClickListener(new NotesAdapter.OnNotesListItemClickListener() {
+            @Override
+            public void onNotesListItemClick(View view, int position) {
+                openNoteDetail(notes.get(position));
+            }
+        });
+
+        adapter.notifyDataSetChanged(); // перерисовка списка
+
+/*
         LinearLayout notesList = view.findViewById(R.id.notes_list);
 
         for (Note note : notes) {
@@ -75,6 +97,7 @@ public class NotesListFragment extends Fragment {
 
             notesList.addView(noteView);
         }
+*/
     }
 
     private void openNoteDetail(Note note) {

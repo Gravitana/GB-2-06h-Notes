@@ -1,6 +1,5 @@
 package com.example.gb_2_06h_notes.ui;
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,21 +17,22 @@ import com.bumptech.glide.Glide;
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
 
-import java.util.Calendar;
+public class NoteEditFragment extends Fragment {
 
-public class NoteDetailFragment extends Fragment implements View.OnClickListener {
 
     private static final String ARG_NOTE = "ARG_NOTE";
 
-    private TextView id, title, body, date;
+    private TextView id;
+    private EditText title, body, date, imageUrl;
     private ImageView image;
 
-    public NoteDetailFragment() {
+
+    public NoteEditFragment() {
         // Required empty public constructor
     }
 
-    public static NoteDetailFragment newInstance(Note note) {
-        NoteDetailFragment fragment = new NoteDetailFragment();
+    public static NoteEditFragment newInstance(Note note) {
+        NoteEditFragment fragment = new NoteEditFragment();
 
         Bundle bundle = new Bundle();
         bundle.putParcelable(ARG_NOTE, note);
@@ -41,20 +42,22 @@ public class NoteDetailFragment extends Fragment implements View.OnClickListener
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_note_detail, container, false);
+        return inflater.inflate(R.layout.fragment_note_edit, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        id = view.findViewById(R.id.note_detail_id);
-        title = view.findViewById(R.id.note_detail_title);
-        body = view.findViewById(R.id.note_detail_body);
-        date = view.findViewById(R.id.note_detail_date);
-        image = view.findViewById(R.id.note_detail_image);
+        id = view.findViewById(R.id.note_edit_id);
+        title = view.findViewById(R.id.note_edit_title);
+        body = view.findViewById(R.id.note_edit_body);
+        date = view.findViewById(R.id.note_edit_date);
+        imageUrl = view.findViewById(R.id.note_edit_image_url);
+        image = view.findViewById(R.id.note_edit_image);
 
         Note note = null;
         if (getArguments() != null) {
@@ -72,22 +75,7 @@ public class NoteDetailFragment extends Fragment implements View.OnClickListener
                     .centerCrop()
                     .into(image);
 
-            date.setOnClickListener(this);
+//            date.setOnClickListener(this);
         }
-    }
-
-    @Override
-    public void onClick(View v) {
-        final Calendar cal = Calendar.getInstance();
-        int mYear = cal.get(Calendar.YEAR);
-        int mMonth = cal.get(Calendar.MONTH);
-        int mDay = cal.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
-                (view, year, monthOfYear, dayOfMonth) -> {
-                    String editTextDateParam = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
-                    date.setText(editTextDateParam);
-                }, mYear, mMonth, mDay);
-        datePickerDialog.show();
     }
 }
