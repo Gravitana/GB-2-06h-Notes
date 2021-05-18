@@ -26,7 +26,8 @@ public class NotesListFragment extends Fragment {
     private NotesListViewModel viewModel;
 
     private NotesAdapter adapter;
-    private NoteClickListener noteClickListener;
+
+//    private NoteClickListener noteClickListener;
 
     public NotesListFragment() {
         // Required empty public constructor
@@ -42,15 +43,18 @@ public class NotesListFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-
+/*
         if (context instanceof NoteClickListener) {
             noteClickListener = (NoteClickListener) context;
         }
+*/
     }
 
     @Override
     public void onDetach() {
+/*
         noteClickListener = null;
+*/
         super.onDetach();
     }
 
@@ -118,13 +122,17 @@ public class NotesListFragment extends Fragment {
         return super.onContextItemSelected(item);
     }
 
+/*
     private void openNoteDetail(Note note) {
         if (noteClickListener != null) {
             noteClickListener.onNoteClicked(note);
         }
     }
+*/
 
+/*
     public interface NoteClickListener { // для открытия фрагмента с детальной инфой
         void onNoteClicked(Note note);
     }
+*/
 }

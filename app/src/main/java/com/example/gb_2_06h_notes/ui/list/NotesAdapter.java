@@ -24,7 +24,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     private static final String DATE_FORMAT = "dd.mm.yyyy";
     private final Fragment fragment;
     private final ArrayList<Note> data = new ArrayList<>();
+/*
     private OnNotesListItemClickListener onNotesListItemClickListener;
+*/
     private int longClickedPosition = -1;
 
     public NotesAdapter(Fragment fragment) {
@@ -56,9 +58,11 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         return data.size();
     }
 
+/*
     public void setOnNotesListItemClickListener(OnNotesListItemClickListener onNotesListItemClickListener) {
         this.onNotesListItemClickListener = onNotesListItemClickListener;
     }
+*/
 
     public int getLongClickedPosition() {
         return longClickedPosition;
@@ -93,10 +97,12 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 .into(holder.image);
     }
 
+/*
     // Интерфейс для обработки нажатий
     public interface OnNotesListItemClickListener {
         void onNotesListItemClick(View view, int position);
     }
+*/
 
     class NotesViewHolder extends RecyclerView.ViewHolder {
 
@@ -110,6 +116,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
             fragment.registerForContextMenu(itemView);
 
+/*
             // Обработчик нажатий на этом NotesViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -119,6 +126,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                     }
                 }
             });
+*/
 
             itemView.setOnLongClickListener(v -> {
                 itemView.showContextMenu();

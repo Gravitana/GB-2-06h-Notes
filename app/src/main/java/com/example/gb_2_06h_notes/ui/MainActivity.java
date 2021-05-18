@@ -17,7 +17,8 @@ import com.example.gb_2_06h_notes.domain.Note;
 import com.example.gb_2_06h_notes.ui.list.NotesListFragment;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NotesListFragment.NoteClickListener {
+public class MainActivity extends AppCompatActivity //implements NotesListFragment.NoteClickListener
+{
 
     private boolean isLandscape = false;
 
@@ -141,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
         Toast.makeText(MainActivity.this, action, Toast.LENGTH_SHORT).show();
     }
 
+/*
     @Override
     public void onNoteClicked(Note note) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -157,4 +159,5 @@ public class MainActivity extends AppCompatActivity implements NotesListFragment
         }
 
     }
+*/
 }
