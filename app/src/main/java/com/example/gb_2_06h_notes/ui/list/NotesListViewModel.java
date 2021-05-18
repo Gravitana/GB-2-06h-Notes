@@ -54,7 +54,6 @@ public class NotesListViewModel extends ViewModel {
                             notes.add(value);
                             notesLiveData.setValue(notes);
                         }
-
                     }
 
                     @Override
@@ -65,7 +64,22 @@ public class NotesListViewModel extends ViewModel {
         );
     }
 
-    public void deleteClicked(int longClickedPosition) {
+    public void deleteClicked(Note note) {
+        repository.remove(note, new Callback<Object>() {
+            @Override
+            public void onSuccess(Object value) {
+                if (notesLiveData.getValue() != null) {
+                    ArrayList<Note> notes = new ArrayList<>(notesLiveData.getValue());
+                    notes.remove(note);
+                    notesLiveData.setValue(notes);
+                }
+            }
+
+            @Override
+            public void onError(Throwable error) {
+
+            }
+        });
 //        repository.removeAtPosition(longClickedPosition);
 //        notesLiveData.setValue(repository.getNotes());
     }

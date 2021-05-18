@@ -120,7 +120,7 @@ public class NotesListFragment extends Fragment {
         }
 
         if (item.getItemId() == R.id.action_delete) {
-            viewModel.deleteClicked(adapter.getLongClickedPosition());
+            viewModel.deleteClicked(adapter.getItemAt(adapter.getLongClickedPosition()));
             return true;
         }
 

@@ -22,6 +22,7 @@ import java.util.List;
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
 
     private static final String DATE_FORMAT = "dd.mm.yyyy";
+
     private final Fragment fragment;
     private final ArrayList<Note> data = new ArrayList<>();
 /*
@@ -56,6 +57,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public Note getItemAt(int longClickedPosition) {
+        return data.get(longClickedPosition);
     }
 
 /*
