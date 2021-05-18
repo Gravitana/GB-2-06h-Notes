@@ -63,7 +63,6 @@ public class NotesListViewModel extends ViewModel {
                     }
                 }
         );
-//        notesLiveData.setValue(repository.getNotes());
     }
 
     public void deleteClicked(int longClickedPosition) {

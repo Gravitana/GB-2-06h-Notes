@@ -104,6 +104,11 @@ public class NotesListFragment extends Fragment {
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
 
+        if (item.getItemId() == R.id.action_add) {
+            viewModel.addClicked();
+            return true;
+        }
+
         if (item.getItemId() == R.id.action_open) {
             Toast.makeText(requireContext(), "action_open", Toast.LENGTH_SHORT).show();
             return true;
