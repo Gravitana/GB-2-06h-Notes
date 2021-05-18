@@ -14,11 +14,13 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
+import com.example.gb_2_06h_notes.ui.auth.AuthFragment;
 import com.example.gb_2_06h_notes.ui.list.NotesListFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity //implements NotesListFragment.NoteClickListener
 {
+    private FragmentManager fragmentManager = getSupportFragmentManager();
 
     private boolean isLandscape = false;
 
@@ -30,7 +32,18 @@ public class MainActivity extends AppCompatActivity //implements NotesListFragme
         isLandscape = getResources().getBoolean(R.bool.isLandscape);
 
         initToolbar();
-        initContent();
+
+//        if (savedInstanceState == null) {
+//            showAuth();
+//        } else {
+            initContent();
+//        }
+    }
+
+    public void showAuth() {
+        fragmentManager.beginTransaction()
+                .replace(R.id.list_fragment, new AuthFragment())
+                .commit();
     }
 
     private void initToolbar() {
@@ -47,7 +60,7 @@ public class MainActivity extends AppCompatActivity //implements NotesListFragme
     }
 
     private void initContent() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (isLandscape) {
             Fragment fragment = fragmentManager.findFragmentById(R.id.list_fragment);
