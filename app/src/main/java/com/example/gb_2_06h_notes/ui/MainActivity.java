@@ -14,37 +14,47 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
+import com.example.gb_2_06h_notes.router.AppRouter;
+import com.example.gb_2_06h_notes.router.RouterHolder;
 import com.example.gb_2_06h_notes.ui.auth.AuthFragment;
 import com.example.gb_2_06h_notes.ui.list.NotesListFragment;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity //implements NotesListFragment.NoteClickListener
+public class MainActivity extends AppCompatActivity implements RouterHolder
 {
+    private AppRouter router;
+/*
     private FragmentManager fragmentManager = getSupportFragmentManager();
+*/
 
+/*
     private boolean isLandscape = false;
+*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        router = new AppRouter(getSupportFragmentManager());
+
+        if (savedInstanceState == null) {
+            router.showNotesList();
+        }
+
+/*
         isLandscape = getResources().getBoolean(R.bool.isLandscape);
+*/
 
         initToolbar();
 
 //        if (savedInstanceState == null) {
 //            showAuth();
 //        } else {
-            initContent();
+//            initContent();
 //        }
     }
 
-    public void showAuth() {
-        fragmentManager.beginTransaction()
-                .replace(R.id.list_fragment, new AuthFragment())
-                .commit();
-    }
 
     private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -54,14 +64,17 @@ public class MainActivity extends AppCompatActivity //implements NotesListFragme
 //        toolbar.setTitle(R.string.app_title);
 
         toolbar.setOnMenuItemClickListener(item -> {
+
             int id = item.getItemId();
-            return navigateFragment(id);
+
+            Toast.makeText(MainActivity.this, "click id=" + id, Toast.LENGTH_SHORT).show();
+
+            return true;//navigateFragment(id);
         });
     }
 
+/*
     private void initContent() {
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-
         if (isLandscape) {
             Fragment fragment = fragmentManager.findFragmentById(R.id.list_fragment);
 
@@ -80,6 +93,7 @@ public class MainActivity extends AppCompatActivity //implements NotesListFragme
             }
         }
     }
+*/
 
     private void initDrawer(Toolbar toolbar) {
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -93,15 +107,26 @@ public class MainActivity extends AppCompatActivity //implements NotesListFragme
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(item -> {
+
             int id = item.getItemId();
+
+            Toast.makeText(MainActivity.this, "click id=" + id, Toast.LENGTH_SHORT).show();
+/*
             if (navigateFragment(id)) {
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
             }
+*/
             return false;
         });
     }
 
+    @Override
+    public AppRouter getRouter() {
+        return router;
+    }
+
+/*
     private boolean navigateFragment(int id) {
         if (id == R.id.action_new) {
             doToast(R.string.action_new);
@@ -154,6 +179,7 @@ public class MainActivity extends AppCompatActivity //implements NotesListFragme
     private void doToast(int action) {
         Toast.makeText(MainActivity.this, action, Toast.LENGTH_SHORT).show();
     }
+*/
 
 /*
     @Override

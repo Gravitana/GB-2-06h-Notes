@@ -18,17 +18,18 @@
 
         <TextView
             android:id="@+id/note_detail_id"
-            android:layout_width="@dimen/pic_size"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_item"
-            tools:text="1" />
+            tools:text="id" />
 
         <TextView
             android:id="@+id/note_detail_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_item"
-            tools:text="30.10.2021" />
+            android:gravity="end"
+            tools:text="дата" />
 
     </LinearLayout>
 

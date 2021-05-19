@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
+import com.example.gb_2_06h_notes.router.AppRouter;
+import com.example.gb_2_06h_notes.router.RouterHolder;
 
 public class NotesListFragment extends Fragment {
 
@@ -110,12 +112,20 @@ public class NotesListFragment extends Fragment {
         }
 
         if (item.getItemId() == R.id.action_open) {
-            Toast.makeText(requireContext(), "action_open", Toast.LENGTH_SHORT).show();
+            if (getActivity() instanceof RouterHolder) {
+                AppRouter router = ((RouterHolder)getActivity()).getRouter();
+                router.showDetail(adapter.getItemAt(adapter.getLongClickedPosition()));
+            }
+//            Toast.makeText(requireContext(), "action_open", Toast.LENGTH_SHORT).show();
             return true;
         }
 
         if (item.getItemId() == R.id.action_update) {
-            Toast.makeText(requireContext(), "action_update", Toast.LENGTH_SHORT).show();
+            if (getActivity() instanceof RouterHolder) {
+                AppRouter router = ((RouterHolder)getActivity()).getRouter();
+                router.editNote(adapter.getItemAt(adapter.getLongClickedPosition()));
+            }
+//            Toast.makeText(requireContext(), "action_update", Toast.LENGTH_SHORT).show();
             return true;
         }
 

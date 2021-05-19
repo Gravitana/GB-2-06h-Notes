@@ -1,7 +1,8 @@
-package com.example.gb_2_06h_notes.ui;
+package com.example.gb_2_06h_notes.ui.detail;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,13 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.gb_2_06h_notes.R;
+import com.example.gb_2_06h_notes.domain.Constants;
 import com.example.gb_2_06h_notes.domain.Note;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class NoteDetailFragment extends Fragment implements View.OnClickListener {
-
-    private static final String ARG_NOTE = "ARG_NOTE";
+public class NoteDetailFragment extends Fragment implements Constants { //View.OnClickListener {
 
     private TextView date;
 
@@ -40,7 +41,6 @@ public class NoteDetailFragment extends Fragment implements View.OnClickListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_note_detail, container, false);
     }
 
@@ -63,17 +63,20 @@ public class NoteDetailFragment extends Fragment implements View.OnClickListener
             id.setText(note.getId());
             title.setText(note.getTitle());
             body.setText(note.getBody());
-            date.setText((CharSequence) note.getCreatedAt());
+            date.setText(DateFormat.format(DATE_FORMAT, note.getCreatedAt()));
 
             Glide.with(image)
                     .load(note.getImageUrl())
                     .centerCrop()
                     .into(image);
 
+/*
             date.setOnClickListener(this);
+*/
         }
     }
 
+/*
     @Override
     public void onClick(View v) {
         final Calendar cal = Calendar.getInstance();
@@ -88,4 +91,5 @@ public class NoteDetailFragment extends Fragment implements View.OnClickListener
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
     }
+*/
 }

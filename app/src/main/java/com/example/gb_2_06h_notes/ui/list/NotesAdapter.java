@@ -14,14 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.gb_2_06h_notes.R;
+import com.example.gb_2_06h_notes.domain.Constants;
 import com.example.gb_2_06h_notes.domain.Note;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
-
-    private static final String DATE_FORMAT = "dd.mm.yyyy";
+public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> implements Constants {
 
     private final Fragment fragment;
     private final ArrayList<Note> data = new ArrayList<>();

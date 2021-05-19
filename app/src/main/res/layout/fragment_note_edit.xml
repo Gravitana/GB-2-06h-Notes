@@ -17,7 +17,7 @@
             android:layout_margin="@dimen/margin_item"
             tools:text="1" />
 
-        <TextView
+        <EditText
             android:id="@+id/note_edit_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,21 +25,21 @@
             tools:text="30.10.2021" />
 
 
-        <TextView
+        <EditText
             android:id="@+id/note_edit_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_item"
             tools:text="Donec bibendum vel nunc consectetur imperdiet" />
 
-        <TextView
+        <EditText
             android:id="@+id/note_edit_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_item"
             tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam accumsan tempus velit, ut cursus est egestas quis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed leo nibh, elementum vitae ipsum sit amet, fermentum semper tortor. Nunc id hendrerit tortor, vel mollis est. Ut mauris quam, euismod a vulputate nec, sagittis ac nisl." />
 
-        <TextView
+        <EditText
             android:id="@+id/note_edit_image_url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
