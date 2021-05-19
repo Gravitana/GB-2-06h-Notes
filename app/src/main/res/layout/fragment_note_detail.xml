@@ -1,56 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin_item"
-    android:backgroundTint="@color/teal_200">
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/teal_200"
+            app:titleTextColor="@color/teal_700"
+            app:title="@string/note_detail" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:id="@+id/note_detail_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_item"
-            tools:text="id" />
-
-        <TextView
-            android:id="@+id/note_detail_date"
+    <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_item"
-            android:gravity="end"
-            tools:text="дата" />
+            android:backgroundTint="@color/teal_200">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/note_detail_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_item"
-        tools:text="Donec bibendum vel nunc consectetur imperdiet" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/note_detail_body"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_item"
-        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam accumsan tempus velit, ut cursus est egestas quis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed leo nibh, elementum vitae ipsum sit amet, fermentum semper tortor. Nunc id hendrerit tortor, vel mollis est. Ut mauris quam, euismod a vulputate nec, sagittis ac nisl." />
+                    <TextView
+                        android:id="@+id/note_detail_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_item"
+                        tools:text="id" />
 
-    <ImageView
-        android:id="@+id/note_detail_image"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/img_height" />
+                    <TextView
+                        android:id="@+id/note_detail_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_item"
+                        android:gravity="end"
+                        tools:text="дата" />
 
-</LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/note_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_item"
+                    tools:text="Donec bibendum vel nunc consectetur imperdiet" />
+
+                <TextView
+                    android:id="@+id/note_detail_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_item"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam accumsan tempus velit, ut cursus est egestas quis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed leo nibh, elementum vitae ipsum sit amet, fermentum semper tortor. Nunc id hendrerit tortor, vel mollis est. Ut mauris quam, euismod a vulputate nec, sagittis ac nisl." />
+
+                <ImageView
+                    android:id="@+id/note_detail_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/img_height" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

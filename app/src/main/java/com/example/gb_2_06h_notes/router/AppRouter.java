@@ -11,7 +11,7 @@ import com.example.gb_2_06h_notes.ui.list.NotesListFragment;
 
 public class AppRouter {
 
-    private FragmentManager fragmentManager;
+    private final FragmentManager fragmentManager;
 
     public AppRouter(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;

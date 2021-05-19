@@ -11,7 +11,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -22,6 +25,8 @@ import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Note;
 import com.example.gb_2_06h_notes.router.AppRouter;
 import com.example.gb_2_06h_notes.router.RouterHolder;
+import com.example.gb_2_06h_notes.ui.MainActivity;
+import com.google.android.material.navigation.NavigationView;
 
 public class NotesListFragment extends Fragment {
 
@@ -42,34 +47,43 @@ public class NotesListFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(NotesListViewModel.class);
     }
 
+/*
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-/*
         if (context instanceof NoteClickListener) {
             noteClickListener = (NoteClickListener) context;
         }
-*/
     }
 
     @Override
     public void onDetach() {
-/*
         noteClickListener = null;
-*/
         super.onDetach();
     }
+*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notes_list, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+
+        toolbar.setOnMenuItemClickListener(item -> {
+
+            if (item.getItemId() == R.id.action_new) {
+                viewModel.addClicked();
+                return true;
+            }
+            return false;
+        });
+
 
         adapter = new NotesAdapter(this);
 
@@ -106,17 +120,11 @@ public class NotesListFragment extends Fragment {
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
 
-        if (item.getItemId() == R.id.action_add) {
-            viewModel.addClicked();
-            return true;
-        }
-
         if (item.getItemId() == R.id.action_open) {
             if (getActivity() instanceof RouterHolder) {
                 AppRouter router = ((RouterHolder)getActivity()).getRouter();
                 router.showDetail(adapter.getItemAt(adapter.getLongClickedPosition()));
             }
-//            Toast.makeText(requireContext(), "action_open", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -125,7 +133,6 @@ public class NotesListFragment extends Fragment {
                 AppRouter router = ((RouterHolder)getActivity()).getRouter();
                 router.editNote(adapter.getItemAt(adapter.getLongClickedPosition()));
             }
-//            Toast.makeText(requireContext(), "action_update", Toast.LENGTH_SHORT).show();
             return true;
         }
 

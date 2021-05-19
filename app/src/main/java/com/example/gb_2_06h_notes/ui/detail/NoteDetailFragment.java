@@ -1,6 +1,5 @@
 package com.example.gb_2_06h_notes.ui.detail;
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -18,10 +17,7 @@ import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Constants;
 import com.example.gb_2_06h_notes.domain.Note;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-public class NoteDetailFragment extends Fragment implements Constants { //View.OnClickListener {
+public class NoteDetailFragment extends Fragment implements Constants {
 
     private TextView date;
 
@@ -33,7 +29,7 @@ public class NoteDetailFragment extends Fragment implements Constants { //View.O
         NoteDetailFragment fragment = new NoteDetailFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putParcelable(ARG_NOTE, note);
+        bundle.putParcelable(CURRENT_NOTE, note);
 
         fragment.setArguments(bundle);
         return fragment;
@@ -56,7 +52,7 @@ public class NoteDetailFragment extends Fragment implements Constants { //View.O
 
         Note note = null;
         if (getArguments() != null) {
-            note = getArguments().getParcelable(ARG_NOTE);
+            note = getArguments().getParcelable(CURRENT_NOTE);
         }
 
         if (note != null) {

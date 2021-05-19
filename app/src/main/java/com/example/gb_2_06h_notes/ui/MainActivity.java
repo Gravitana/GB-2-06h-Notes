@@ -46,7 +46,9 @@ public class MainActivity extends AppCompatActivity implements RouterHolder
         isLandscape = getResources().getBoolean(R.bool.isLandscape);
 */
 
+/*
         initToolbar();
+*/
 
 //        if (savedInstanceState == null) {
 //            showAuth();
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements RouterHolder
     }
 
 
+/*
     private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements RouterHolder
             return true;//navigateFragment(id);
         });
     }
+*/
 
 /*
     private void initContent() {
@@ -95,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements RouterHolder
     }
 */
 
+/*
     private void initDrawer(Toolbar toolbar) {
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -111,15 +116,14 @@ public class MainActivity extends AppCompatActivity implements RouterHolder
             int id = item.getItemId();
 
             Toast.makeText(MainActivity.this, "click id=" + id, Toast.LENGTH_SHORT).show();
-/*
             if (navigateFragment(id)) {
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
             }
-*/
             return false;
         });
     }
+*/
 
     @Override
     public AppRouter getRouter() {
