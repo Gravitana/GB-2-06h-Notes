@@ -24,4 +24,7 @@
     <string name="hint_note_body">Текст заметки</string>
     <string name="hint_note_image_url">Ссылка на картинку</string>
     <string name="note_detail">Заметка</string>
+    <string name="hint_note_date">Дата создания</string>
+    <string name="change_date">Изменить дату</string>
+    <string name="set_date">Установить дату</string>
 </resources>
