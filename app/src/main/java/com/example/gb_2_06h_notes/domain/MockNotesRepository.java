@@ -1,12 +1,24 @@
 package com.example.gb_2_06h_notes.domain;
 
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class MockNotesRepository implements NotesRepository {
+    @Override
+    public void getNotes(Callback<List<Note>> callback) {
 
+    }
+
+    @Override
+    public void addNote(String title, String body, String imgeUrl, Callback<Note> callback) {
+
+    }
+
+    @Override
+    public void remove(Note item, Callback<Object> callback) {
+
+    }
+/*
     private ArrayList<Note> data = new ArrayList<>();
 
     public MockNotesRepository() {
@@ -48,4 +60,5 @@ public class MockNotesRepository implements NotesRepository {
     public void removeAtPosition(int longClickedPosition) {
         data.remove(longClickedPosition);
     }
+ */
 }

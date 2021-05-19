@@ -1,37 +1,12 @@
 package com.example.gb_2_06h_notes.domain;
 
-import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
 public class Note implements Parcelable {
-
-    private final int id;
-    private final String title;
-    private final String body;
-    private final Long time;
-    private final String imageUrl;
-
-    public Note(int id, String title, String body, Long time, String imageUrl) {
-        this.id = id;
-        this.title = title;
-        this.body = body;
-        this.time = time;
-        this.imageUrl = imageUrl;
-    }
-
-    protected Note(Parcel in) {
-        id = in.readInt();
-        title = in.readString();
-        body = in.readString();
-        time = in.readLong();
-        imageUrl = in.readString();
-    }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
         @Override
@@ -45,12 +20,30 @@ public class Note implements Parcelable {
         }
     };
 
-    public int getId() {
-        return id;
+    private final String id;
+    private final String title;
+    private final String body;
+    private final Date createdAt;
+    private final String imageUrl;
+
+    public Note(String id, String title, String body, Date createdAt, String imageUrl) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.createdAt = createdAt;
+        this.imageUrl = imageUrl;
     }
 
-    public String getStringId() {
-        return String.valueOf(getId());
+    protected Note(Parcel in) {
+        id = in.readString();
+        title = in.readString();
+        body = in.readString();
+        createdAt = (Date) in.readSerializable();
+        imageUrl = in.readString();
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -61,14 +54,8 @@ public class Note implements Parcelable {
         return body;
     }
 
-    public Long getTime() {
-        return time;
-    }
-
-    public String getDate() {
-        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        Date date =  new Date(time);
-        return dateFormat.format(date);
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
     public String getImageUrl() {
@@ -82,10 +69,10 @@ public class Note implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
+        dest.writeString(id);
         dest.writeString(title);
         dest.writeString(body);
-        dest.writeLong(time);
+        dest.writeSerializable(createdAt);
         dest.writeString(imageUrl);
     }
 
@@ -97,12 +84,12 @@ public class Note implements Parcelable {
         return id == note.id &&
                 Objects.equals(title, note.title) &&
                 Objects.equals(body, note.body) &&
-                Objects.equals(time, note.time) &&
+                Objects.equals(createdAt, note.createdAt) &&
                 Objects.equals(imageUrl, note.imageUrl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, body, time, imageUrl);
+        return Objects.hash(id, title, body, createdAt, imageUrl);
     }
 }

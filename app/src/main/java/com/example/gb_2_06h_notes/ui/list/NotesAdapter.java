@@ -1,5 +1,6 @@
 package com.example.gb_2_06h_notes.ui.list;
 
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,13 @@ import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
 
-    private ArrayList<Note> data = new ArrayList<>();
-
-    private OnNotesListItemClickListener onNotesListItemClickListener;
+    private static final String DATE_FORMAT = "dd.mm.yyyy";
 
     private final Fragment fragment;
-
+    private final ArrayList<Note> data = new ArrayList<>();
+/*
+    private OnNotesListItemClickListener onNotesListItemClickListener;
+*/
     private int longClickedPosition = -1;
 
     public NotesAdapter(Fragment fragment) {
@@ -42,9 +44,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     public void onBindViewHolder(@NonNull NotesAdapter.NotesViewHolder holder, int position) {
         Note note = data.get(position);
 
-        holder.id.setText(note.getStringId());
+        holder.id.setText(note.getId());
         holder.title.setText(note.getTitle());
-        holder.date.setText(note.getDate());
+        holder.date.setText(DateFormat.format(DATE_FORMAT, note.getCreatedAt()));
 
         Glide.with(holder.image)
                 .load(note.getImageUrl())
@@ -57,9 +59,15 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         return data.size();
     }
 
+    public Note getItemAt(int longClickedPosition) {
+        return data.get(longClickedPosition);
+    }
+
+/*
     public void setOnNotesListItemClickListener(OnNotesListItemClickListener onNotesListItemClickListener) {
         this.onNotesListItemClickListener = onNotesListItemClickListener;
     }
+*/
 
     public int getLongClickedPosition() {
         return longClickedPosition;
@@ -74,11 +82,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         data.addAll(toAdd);
 
         result.dispatchUpdatesTo(this);
-    }
-
-    // Интерфейс для обработки нажатий
-    public interface OnNotesListItemClickListener {
-        void onNotesListItemClick(View view, int position);
     }
 
     /*
@@ -99,6 +102,13 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 .into(holder.image);
     }
 
+/*
+    // Интерфейс для обработки нажатий
+    public interface OnNotesListItemClickListener {
+        void onNotesListItemClick(View view, int position);
+    }
+*/
+
     class NotesViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView id;
@@ -111,6 +121,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
             fragment.registerForContextMenu(itemView);
 
+/*
             // Обработчик нажатий на этом NotesViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -120,6 +131,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                     }
                 }
             });
+*/
 
             itemView.setOnLongClickListener(v -> {
                 itemView.showContextMenu();
@@ -134,9 +146,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         }
 
         public void bind(Note note) {
-            id.setText(note.getStringId());
+            id.setText(note.getId());
             title.setText(note.getTitle());
-            date.setText(note.getDate());
+            date.setText(DateFormat.format(DATE_FORMAT, note.getCreatedAt()));
         }
     }
 
