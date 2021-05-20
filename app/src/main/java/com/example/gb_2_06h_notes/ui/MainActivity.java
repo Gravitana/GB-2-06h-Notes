@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements RouterHolder
         router = new AppRouter(getSupportFragmentManager());
 
         if (savedInstanceState == null) {
-            router.showNotesList();
+            router.showAuth();
+//            router.showNotesList();
         }
 
 /*
