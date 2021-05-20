@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,11 +17,13 @@ import com.bumptech.glide.Glide;
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.domain.Constants;
 import com.example.gb_2_06h_notes.domain.Note;
+import com.example.gb_2_06h_notes.router.AppRouter;
+import com.example.gb_2_06h_notes.router.RouterHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> implements Constants {
+public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> implements Constants, RouterHolder {
 
     private final Fragment fragment;
 
@@ -94,6 +97,11 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 .into(holder.image);
     }
 
+    @Override
+    public AppRouter getRouter() {
+        return null;
+    }
+
     class NotesViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView id;
@@ -110,6 +118,14 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 itemView.showContextMenu();
                 longClickedPosition = getAdapterPosition();
                 return true;
+            });
+
+            itemView.setOnClickListener(v -> {
+                Note note = data.get(getAdapterPosition());
+
+                AppRouter router = new AppRouter(fragment.getParentFragmentManager());
+
+                router.showDetail(note);
             });
 
             id = itemView.findViewById(R.id.note_item_id);
