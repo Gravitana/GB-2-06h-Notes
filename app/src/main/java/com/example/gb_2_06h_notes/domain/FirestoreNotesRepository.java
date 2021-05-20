@@ -28,32 +28,29 @@ public class FirestoreNotesRepository implements NotesRepository {
     public void getNotes(Callback<List<Note>> callback) {
         fireStore.collection(NOTES)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                .addOnCompleteListener(task -> {
 
-                        if (task.isSuccessful()) {
+                    if (task.isSuccessful()) {
 
-                            ArrayList<Note> tmp = new ArrayList<>();
+                        ArrayList<Note> tmp = new ArrayList<>();
 
-                            List<DocumentSnapshot> docs = task.getResult().getDocuments();
+                        List<DocumentSnapshot> docs = task.getResult().getDocuments();
 
-                            for (DocumentSnapshot doc : docs) {
-                                String id = doc.getId();
+                        for (DocumentSnapshot doc : docs) {
+                            String id = doc.getId();
 
-                                String title = doc.getString(TITLE);
-                                String body = doc.getString(BODY);
-                                Date createdAt = doc.getDate(CREATED);
-                                String image = doc.getString(IMAGE);
+                            String title = doc.getString(TITLE);
+                            String body = doc.getString(BODY);
+                            Date createdAt = doc.getDate(CREATED);
+                            String image = doc.getString(IMAGE);
 
-                                tmp.add(new Note(id, title, body, createdAt, image));
-                            }
-
-                            callback.onSuccess(tmp);
-
-                        } else {
-                            callback.onError(task.getException());
+                            tmp.add(new Note(id, title, body, createdAt, image));
                         }
+
+                        callback.onSuccess(tmp);
+
+                    } else {
+                        callback.onError(task.getException());
                     }
                 });
     }
@@ -72,14 +69,11 @@ public class FirestoreNotesRepository implements NotesRepository {
 
         fireStore.collection(NOTES)
                 .add(data)
-                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        if (task.isSuccessful()) {
-                            callback.onSuccess(new Note(task.getResult().getId(), title, body, date, imgeUrl));
-                        } else {
-                            callback.onError(task.getException());
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        callback.onSuccess(new Note(task.getResult().getId(), title, body, date, imgeUrl));
+                    } else {
+                        callback.onError(task.getException());
                     }
                 });
     }
@@ -90,14 +84,11 @@ public class FirestoreNotesRepository implements NotesRepository {
         fireStore.collection(NOTES)
                 .document(item.getId())
                 .delete()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            callback.onSuccess(new Object());
-                        } else {
-                            callback.onError(task.getException());
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        callback.onSuccess(new Object());
+                    } else {
+                        callback.onError(task.getException());
                     }
                 });
     }
