@@ -76,23 +76,19 @@ public class EditNoteFragment extends Fragment implements Constants {
         else
             editDate.setText(R.string.set_date);
 
-        editDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar cal = Calendar.getInstance();
-                int mYear = cal.get(Calendar.YEAR);
-                int mMonth = cal.get(Calendar.MONTH);
-                int mDay = cal.get(Calendar.DAY_OF_MONTH);
+        editDate.setOnClickListener(v -> {
+            final Calendar cal = Calendar.getInstance();
+            int mYear = cal.get(Calendar.YEAR);
+            int mMonth = cal.get(Calendar.MONTH);
+            int mDay = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
-                        (view, year, monthOfYear, dayOfMonth) -> {
-                            String editTextDateParam = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
-                            editDate.setText(editTextDateParam);
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.show();
-            }
+            DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                    (view1, year, monthOfYear, dayOfMonth) -> {
+                        String editTextDateParam = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                        editDate.setText(editTextDateParam);
+                    }, mYear, mMonth, mDay);
+            datePickerDialog.show();
         });
-
 
 /*
         DatePicker picker = view.findViewById(R.id.date_picker);

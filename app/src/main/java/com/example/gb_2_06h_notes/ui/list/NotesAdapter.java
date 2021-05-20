@@ -23,10 +23,9 @@ import java.util.List;
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> implements Constants {
 
     private final Fragment fragment;
+
     private final ArrayList<Note> data = new ArrayList<>();
-/*
-    private OnNotesListItemClickListener onNotesListItemClickListener;
-*/
+
     private int longClickedPosition = -1;
 
     public NotesAdapter(Fragment fragment) {
@@ -62,12 +61,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         return data.get(longClickedPosition);
     }
 
-/*
-    public void setOnNotesListItemClickListener(OnNotesListItemClickListener onNotesListItemClickListener) {
-        this.onNotesListItemClickListener = onNotesListItemClickListener;
-    }
-*/
-
     public int getLongClickedPosition() {
         return longClickedPosition;
     }
@@ -101,13 +94,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
                 .into(holder.image);
     }
 
-/*
-    // Интерфейс для обработки нажатий
-    public interface OnNotesListItemClickListener {
-        void onNotesListItemClick(View view, int position);
-    }
-*/
-
     class NotesViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView id;
@@ -119,18 +105,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
             super(itemView);
 
             fragment.registerForContextMenu(itemView);
-
-/*
-            // Обработчик нажатий на этом NotesViewHolder
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onNotesListItemClickListener != null) {
-                        onNotesListItemClickListener.onNotesListItemClick(v, getAdapterPosition());
-                    }
-                }
-            });
-*/
 
             itemView.setOnLongClickListener(v -> {
                 itemView.showContextMenu();

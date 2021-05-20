@@ -19,8 +19,6 @@ import com.example.gb_2_06h_notes.domain.Note;
 
 public class NoteDetailFragment extends Fragment implements Constants {
 
-    private TextView date;
-
     public NoteDetailFragment() {
         // Required empty public constructor
     }
@@ -47,7 +45,7 @@ public class NoteDetailFragment extends Fragment implements Constants {
         TextView id = view.findViewById(R.id.note_detail_id);
         TextView title = view.findViewById(R.id.note_detail_title);
         TextView body = view.findViewById(R.id.note_detail_body);
-        date = view.findViewById(R.id.note_detail_date);
+        TextView date = view.findViewById(R.id.note_detail_date);
         ImageView image = view.findViewById(R.id.note_detail_image);
 
         Note note = null;
@@ -65,27 +63,6 @@ public class NoteDetailFragment extends Fragment implements Constants {
                     .load(note.getImageUrl())
                     .centerCrop()
                     .into(image);
-
-/*
-            date.setOnClickListener(this);
-*/
         }
     }
-
-/*
-    @Override
-    public void onClick(View v) {
-        final Calendar cal = Calendar.getInstance();
-        int mYear = cal.get(Calendar.YEAR);
-        int mMonth = cal.get(Calendar.MONTH);
-        int mDay = cal.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
-                (view, year, monthOfYear, dayOfMonth) -> {
-                    String editTextDateParam = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
-                    date.setText(editTextDateParam);
-                }, mYear, mMonth, mDay);
-        datePickerDialog.show();
-    }
-*/
 }

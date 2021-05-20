@@ -80,7 +80,5 @@ public class NotesListViewModel extends ViewModel {
 
             }
         });
-//        repository.removeAtPosition(longClickedPosition);
-//        notesLiveData.setValue(repository.getNotes());
     }
 }

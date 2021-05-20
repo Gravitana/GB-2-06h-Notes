@@ -1,20 +1,16 @@
 package com.example.gb_2_06h_notes.ui.list;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -22,19 +18,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gb_2_06h_notes.R;
-import com.example.gb_2_06h_notes.domain.Note;
 import com.example.gb_2_06h_notes.router.AppRouter;
 import com.example.gb_2_06h_notes.router.RouterHolder;
-import com.example.gb_2_06h_notes.ui.MainActivity;
-import com.google.android.material.navigation.NavigationView;
 
 public class NotesListFragment extends Fragment {
 
     private NotesListViewModel viewModel;
 
     private NotesAdapter adapter;
-
-//    private NoteClickListener noteClickListener;
 
     public NotesListFragment() {
         // Required empty public constructor
@@ -46,22 +37,6 @@ public class NotesListFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(NotesListViewModel.class);
     }
-
-/*
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof NoteClickListener) {
-            noteClickListener = (NoteClickListener) context;
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        noteClickListener = null;
-        super.onDetach();
-    }
-*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -122,7 +97,7 @@ public class NotesListFragment extends Fragment {
 
         if (item.getItemId() == R.id.action_open) {
             if (getActivity() instanceof RouterHolder) {
-                AppRouter router = ((RouterHolder)getActivity()).getRouter();
+                AppRouter router = ((RouterHolder) getActivity()).getRouter();
                 router.showDetail(adapter.getItemAt(adapter.getLongClickedPosition()));
             }
             return true;
@@ -130,7 +105,7 @@ public class NotesListFragment extends Fragment {
 
         if (item.getItemId() == R.id.action_update) {
             if (getActivity() instanceof RouterHolder) {
-                AppRouter router = ((RouterHolder)getActivity()).getRouter();
+                AppRouter router = ((RouterHolder) getActivity()).getRouter();
                 router.editNote(adapter.getItemAt(adapter.getLongClickedPosition()));
             }
             return true;
@@ -143,18 +118,4 @@ public class NotesListFragment extends Fragment {
 
         return super.onContextItemSelected(item);
     }
-
-/*
-    private void openNoteDetail(Note note) {
-        if (noteClickListener != null) {
-            noteClickListener.onNoteClicked(note);
-        }
-    }
-*/
-
-/*
-    public interface NoteClickListener { // для открытия фрагмента с детальной инфой
-        void onNoteClicked(Note note);
-    }
-*/
 }

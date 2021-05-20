@@ -42,5 +42,4 @@ public class AppRouter {
                 .replace(R.id.container, new AuthFragment())
                 .commit();
     }
-
 }

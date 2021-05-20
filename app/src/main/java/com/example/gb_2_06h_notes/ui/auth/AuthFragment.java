@@ -42,13 +42,10 @@ public class AuthFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.sign_in).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = client.getSignInIntent();
+        view.findViewById(R.id.sign_in).setOnClickListener(v -> {
+            Intent intent = client.getSignInIntent();
 
-                startActivityForResult(intent, REQUEST_CODE);
-            }
+            startActivityForResult(intent, REQUEST_CODE);
         });
     }
 
