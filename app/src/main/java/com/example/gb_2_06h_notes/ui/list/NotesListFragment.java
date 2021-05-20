@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gb_2_06h_notes.R;
 import com.example.gb_2_06h_notes.router.AppRouter;
 import com.example.gb_2_06h_notes.router.RouterHolder;
+import com.example.gb_2_06h_notes.ui.AddNoteDialogFragment;
 
 public class NotesListFragment extends Fragment {
 
@@ -56,12 +57,13 @@ public class NotesListFragment extends Fragment {
         toolbar.setOnMenuItemClickListener(item -> {
 
             if (item.getItemId() == R.id.action_new) {
-                viewModel.addClicked();
+
+                showAddNoteDialog(); //viewModel.addClicked();
+
                 return true;
             }
             return false;
         });
-
 
         adapter = new NotesAdapter(this);
 
@@ -86,6 +88,10 @@ public class NotesListFragment extends Fragment {
         itemDecoration.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.items_separator));
 
         notesList.addItemDecoration(itemDecoration);
+    }
+
+    private void showAddNoteDialog() {
+        new AddNoteDialogFragment().show(getParentFragmentManager(), "AddNoteDialogFragment");
     }
 
     @Override

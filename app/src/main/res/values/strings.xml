@@ -31,4 +31,5 @@
     <string name="delete_note_message">Вы действительно хотите удалить заметку?</string>
     <string name="delete_note_positive">Удалить</string>
     <string name="cancel">Отмена</string>
+    <string name="save">Сохранить</string>
 </resources>
