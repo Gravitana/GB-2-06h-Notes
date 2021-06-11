@@ -27,4 +27,9 @@
     <string name="hint_note_date">Дата создания</string>
     <string name="change_date">Изменить дату</string>
     <string name="set_date">Установить дату</string>
+    <string name="delete_note_title">Удаление заметки</string>
+    <string name="delete_note_message">Вы действительно хотите удалить заметку?</string>
+    <string name="delete_note_positive">Удалить</string>
+    <string name="cancel">Отмена</string>
+    <string name="save">Сохранить</string>
 </resources>

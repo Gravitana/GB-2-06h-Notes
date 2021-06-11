@@ -40,8 +40,8 @@ public class NotesListViewModel extends ViewModel {
     public void addClicked() {
         repository.addNote(
                 UUID.randomUUID().toString(),
-                "Заметка-заглушка для имитации добавления заметки",
-                "https://cdn.pixabay.com/photo/2021/03/17/09/06/snowdrop-6101818_960_720.jpg",
+                "Заметка-заглушка",
+                "https://cdn.pixabay.com/photo/2020/05/05/16/54/wisteria-5133949_960_720.jpg",
                 new Callback<Note>() {
                     @Override
                     public void onSuccess(Note value) {
